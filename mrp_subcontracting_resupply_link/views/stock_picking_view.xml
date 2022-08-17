@@ -1,0 +1,42 @@
+<odoo>
+    <record id="view_picking_form_mrp" model="ir.ui.view">
+        <field name="name">stock.picking.form.mrp.button</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="groups_id" eval="[(4, ref('mrp.group_mrp_user'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="mrp_production_count" invisible="1" />
+                <button
+                    string="Productions"
+                    type="object"
+                    name="action_view_mrp_productions"
+                    class="oe_stat_button"
+                    icon="fa-wrench"
+                    groups="base.group_no_one"
+                    attrs="{'invisible': [('mrp_production_count', '=', 0)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_picking_form_purchase" model="ir.ui.view">
+        <field name="name">stock.picking.form.purchase.button</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form" />
+        <field name="groups_id" eval="[(4, ref('purchase.group_purchase_user'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <field name="mrp_subcontracting_purchase_order_count" invisible="1" />
+                <button
+                    string="Purchase orders"
+                    type="object"
+                    name="action_view_mrp_subcontracting_purchase_orders"
+                    class="oe_stat_button"
+                    icon="fa-credit-card"
+                    groups="base.group_no_one"
+                    attrs="{'invisible': [('mrp_subcontracting_purchase_order_count', '=', 0)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
