@@ -30,7 +30,7 @@ class PurchaseOrder(models.Model):
             order_pickings = order.picking_ids.filtered(
                 lambda x: x.state not in ("done", "cancel")
             )
-            moves = order_pickings.move_lines.filtered(
+            moves = order_pickings.move_ids.filtered(
                 lambda x: x.is_subcontract and x.move_orig_ids
             )
             if moves:
@@ -67,7 +67,9 @@ class PurchaseOrder(models.Model):
                 order.with_user(SUPERUSER_ID).message_post(body=body)
 
     def action_view_subcontracting_resupply(self):
-        action = self.env.ref("stock.action_picking_tree_all").sudo().read()[0]
+        action = self.env["ir.actions.act_window"]._for_xml_id(
+            "stock.action_picking_tree_all"
+        )
         picking_ids = self.mapped("subcontracting_resupply_ids")
         if len(picking_ids) > 1:
             action["domain"] = [("id", "in", picking_ids.ids)]

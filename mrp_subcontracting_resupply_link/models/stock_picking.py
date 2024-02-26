@@ -14,12 +14,10 @@ class StockPicking(models.Model):
         string="Subcontracting order",
     )
 
-    @api.depends("move_lines", "move_lines.rule_id", "move_lines.move_dest_ids")
+    @api.depends("move_ids", "move_ids.rule_id", "move_ids.move_dest_ids")
     def _compute_subcontracting_purchase_order_id(self):
         for item in self:
-            move_dests = item.move_lines.filtered(
-                lambda x: x.rule_id and x.move_dest_ids
-            )
+            move_dests = item.move_ids.filtered(lambda x: x.rule_id and x.move_dest_ids)
             order_id = False
             if move_dests:
                 productions = move_dests.mapped(

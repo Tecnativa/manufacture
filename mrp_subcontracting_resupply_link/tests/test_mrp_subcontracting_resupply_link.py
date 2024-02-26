@@ -23,7 +23,7 @@ class TestMrpSubcontractingResupplyLink(TestMailCommon):
                         0,
                         0,
                         {
-                            "name": cls.supplier.id,
+                            "partner_id": cls.supplier.id,
                             "min_qty": 1,
                             "price": 10,
                         },
