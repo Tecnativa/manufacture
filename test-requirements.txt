@@ -1,0 +1,1 @@
+odoo-addon-stock_capture @ git+https://github.com/Tecnativa/stock-logistics-barcode@20.0-ADD-stock_capture#subdirectory=stock_capture
