@@ -1,0 +1,5 @@
+This module repacks a product with manufacturing orders that consume the product they produce, so the time spent repacking adds to its cost. It is meant for products weighed and packed again, e.g. bulk product put in packages of variable weight, without creating a second product for the packed one.
+
+A bill of materials cannot have its product as component, so repacking orders have no bill of materials: they get the product as component and an operation in the repacking work center when they are confirmed. The operation time is valued at the cost per hour of the work center and added to the value of the repacked product. The lot of the order is consumed and produced again, so repacking keeps the lot.
+
+Odoo computes the average cost replaying the moves in order, and the moves of a manufacturing order are done at the same time, so this module makes sure the consumption is valued before the production. Otherwise the cost of the operation would be spread over the stock both before and after repacking.
